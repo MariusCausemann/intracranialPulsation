@@ -1,0 +1,14 @@
+
+__default__:
+  nodes : 1
+  partition : defq,milanq
+  time : 00:60:00
+  job-name : "{rule}.{wildcards}"
+  output : "logs/{rule}/{wildcards}.out"
+  error : "logs/{rule}/{wildcards}.err"
+  #threads-per-core : 1
+
+extractPressureData:
+  time : 02:00:00
+
+

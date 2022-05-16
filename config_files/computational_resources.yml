@@ -1,0 +1,16 @@
+
+coarseBrainMesh :
+  secs_per_solve : 10
+  secs_for_factorization : 200
+  mem : 20000
+  cpus : 8
+midBrainMesh :
+  secs_per_solve : 30
+  secs_for_factorization : 2000
+  mem : 20000
+  cpus : 32
+fineBrainMesh :
+  secs_per_solve : 20
+  secs_for_factorization : 4000
+  mem : 20000
+  cpus : 128
