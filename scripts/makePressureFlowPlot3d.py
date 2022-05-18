@@ -40,7 +40,7 @@ class ImageGenerator(object):
         T = sim_config["T"]
         num_steps = sim_config["num_steps"]
         try:
-            os.mkdir(movie_path)
+            os.mkdir(plot3d_path)
         except FileExistsError:
             pass
         self.source_expr = source_expr
@@ -137,16 +137,15 @@ def create_array_plot(path, time_indices, source_expr, img_gen_func, times):
     fig.savefig(path + "_array_plot.pdf")
 
 if __name__=="__main__":
-    print("start movie creation...")
     mesh_name = sys.argv[1]
     sim_name = sys.argv[2] 
-    movie_path = f"results/{mesh_name}_{sim_name}/movies/{name}"
+    plot3d_path = f"results/{mesh_name}_{sim_name}/plot3d/{name}"
 
 
     phase_times = [0.13, .35, 0.56, 0.8]
     img_gen = ImageGenerator(mesh_name, sim_name, times=phase_times)
 
     img_gen_func = lambda time_idx, view: img_gen.generate_image(time_idx, view=view)
-    create_array_plot(f"{movie_path}/{name}", img_gen.time_indices,
+    create_array_plot(f"{plot3d_path}/{name}", img_gen.time_indices,
                       img_gen.source_expr, img_gen_func, img_gen.times)
 

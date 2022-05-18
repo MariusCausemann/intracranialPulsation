@@ -167,7 +167,7 @@ def plot_source_rgb_raw(source_series, times, t, size, dpi):
 
 
 # create video
-def create_movie(path, times, source_expr, plot_generator, fps, interpolate_frames):
+def create_plot3d(path, times, source_expr, plot_generator, fps, interpolate_frames):
     source_series = []
     for i in range(len(times)):
         #source_expr.t=t
@@ -208,7 +208,7 @@ def load_results_and_mesh(mesh_name, sim_name):
     sim_file_old = f"results/{mesh_name}_{sim_name}/results.xdmf"
     sim_file = f"results/{mesh_name}_{sim_name}/results.xdmf"
 
-    movie_path = f"results/{mesh_name}_{sim_name}/movies/"
+    plot3d_path = f"results/{mesh_name}_{sim_name}/plot3d/"
     sim_config_file = f"results/{mesh_name}_{sim_name}/config.yml"
     mesh_config_file = f"meshes/{mesh_name}/{mesh_name}_config.yml"
     label_file = f"meshes/{mesh_name}/{mesh_name}_labels.xdmf"
