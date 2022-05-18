@@ -2,15 +2,15 @@
 import yaml
 
 real_brain_simulations = [("coarseBrainMesh","standardNt240"),
-                          #("coarseBrainMesh","standardNt960"),
-                          #("midBrainMesh","standardNt960"),
-                          #("fineBrainMesh","standardNt960"),
-                          #("fineBrainMesh","standardNt480"),
-                          #("fineBrainMesh","standardNt240"),
-                          #("fineBrainMesh","ModelA"),
-                          #("fineBrainMesh","ModelB"),
-                          #("fineBrainMesh","ModelC"),
-                          #("fineBrainMesh","ModelD"),
+                          ("coarseBrainMesh","standardNt960"),
+                          ("midBrainMesh","standardNt960"),
+                          ("fineBrainMesh","standardNt960"),
+                          ("fineBrainMesh","standardNt480"),
+                          ("fineBrainMesh","standardNt240"),
+                          ("fineBrainMesh","ModelA"),
+                          ("fineBrainMesh","ModelB"),
+                          ("fineBrainMesh","ModelC"),
+                          ("fineBrainMesh","ModelD"),
                         ]
 
 sing_image = "biotstokes_openblas.simg"
