@@ -2,20 +2,21 @@
 import yaml
 
 real_brain_simulations = [("coarseBrainMesh","standardNt240"),
-                          ("coarseBrainMesh","standardNt960"),
-                          ("midBrainMesh","standardNt960"),
-                          ("fineBrainMesh","standardNt960"),
-                          ("fineBrainMesh","standardNt480"),
-                          ("fineBrainMesh","standardNt240"),
-                          ("fineBrainMesh","ModelA"),
-                          ("fineBrainMesh","ModelB"),
-                          ("fineBrainMesh","ModelC"),
-                          ("fineBrainMesh","ModelD"),
+                          #("coarseBrainMesh","standardNt960"),
+                          #("midBrainMesh","standardNt960"),
+                          #("fineBrainMesh","standardNt960"),
+                          #("fineBrainMesh","standardNt480"),
+                          #("fineBrainMesh","standardNt240"),
+                          #("fineBrainMesh","ModelA"),
+                          #("fineBrainMesh","ModelB"),
+                          #("fineBrainMesh","ModelC"),
+                          #("fineBrainMesh","ModelD"),
                         ]
 
 sing_image = "biotstokes_openblas.simg"
 sing_image = "docker://mcause/brainsim:openblas"
 mpi_command = "srun"
+meshes = ["coarseBrainMesh", "midBrainMesh", "fineBrainMesh"]
 
 plot3d = ["PressureFlow", "SagittalPressure", "SagittalDisplacement"] 
 
@@ -47,6 +48,26 @@ rule all:
                     sim=[f"{mesh}_{sim_name}" for mesh, sim_name in real_brain_simulations ]),
         expand("results/{sim}/displacement_key_quantities.yml",
                     sim=[f"{mesh}_{sim_name}" for mesh, sim_name in real_brain_simulations ]),
+
+rule extractMeshes:
+    input:
+        "meshes/meshes.tar.gz.aa",
+        "meshes/meshes.tar.gz.ab",
+        "meshes/meshes.tar.gz.ac",
+        "meshes/meshes.tar.gz.ad",
+    output:
+        expand("meshes/{mesh}/{mesh}.h5", mesh=meshes),
+        expand("meshes/{mesh}/{mesh}.xdmf", mesh=meshes),
+        expand("meshes/{mesh}/{mesh}_boundaries.h5", mesh=meshes),
+        expand("meshes/{mesh}/{mesh}_boundaries.xdmf", mesh=meshes),
+    shell:
+        """
+        singularity exec \
+        {sing_image} bash -c \
+        "cd meshes && cat meshes.tar.gz.* | tar xzv --strip-components=1"
+        """
+
+
 
 rule runBrainSim:
     input:
